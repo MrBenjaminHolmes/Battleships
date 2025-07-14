@@ -1,8 +1,8 @@
 import "./styles.css";
 
-function createBattleship(length) {
+function createBattleship(size) {
   return {
-    length,
+    size,
     hits: 0,
     hit() {
       this.hits++;
@@ -20,10 +20,31 @@ function createGameBoard() {
     .fill(null)
     .map(() => Array(10).fill(null));
 
-  function placeShip(ship, startX, startY, isHorizontal = True) {}
-  function receiveAttack(x, y) {}
+  function placeShip(ship, startX, startY, isHorizontal = true) {
+    for (let i = 0; i < ship.size; i++) {
+      const x = isHorizontal ? startX + i : startX;
+      const y = isHorizontal ? startY + i : startY;
+
+      if (x < 0 || x >= 10 || y < 0 || y >= 10) return false;
+      if (board[y][x] !== null) return false;
+    }
+    for (let i = 0; i < ship.size; i++) {
+      const x = isHorizontal ? startX + i : startX;
+      const y = isHorizontal ? startY : startY + i;
+      board[y][x] = ship;
+    }
+    ships.push(ship);
+    return true;
+  }
+
+  function receiveAttack(x, y) {
+    if (board[x][y] !== null) {
+      const hitShip = board[x][y];
+      hitShip.hit();
+    }
+  }
   function allSunk() {
-    for (let i; i <= ships.length; i++) {
+    for (let i = 0; i <= ships.length; i++) {
       if (ships[i].isSunk()) {
         continue;
       } else {
@@ -48,3 +69,9 @@ function createGameBoard() {
     },
   };
 }
+
+const testShip = createBattleship(4);
+const testBoard = createGameBoard();
+testBoard.placeShip(testShip, 4, 4, true);
+console.log(testShip.isSunk());
+console.log(testBoard.board);
