@@ -1,3 +1,56 @@
-* {
-  background-color: rgb(228, 228, 228);
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background: #f0f8ff;
+}
+
+#mainBody {
+  display: flex;
+  gap: 40px;
+}
+
+.board {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#player,
+#computer {
+  display: grid;
+  grid-template-columns: repeat(10, 30px);
+  grid-template-rows: repeat(10, 30px);
+  gap: 2px;
+  width: max-content;
+  margin: 20px;
+}
+
+.cell {
+  width: 30px;
+  height: 30px;
+  background-color: #cce5ff;
+  border: 1px solid #007bff;
+  cursor: pointer;
+  user-select: none;
+}
+
+.cell.ship {
+  background-color: #004d80;
+}
+
+.cell.hit {
+  background-color: red;
+}
+
+.cell.miss {
+  background-color: white;
+}
+
+.board-label {
+  text-align: center;
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 1.2em;
 }
