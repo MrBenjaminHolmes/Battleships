@@ -72,6 +72,19 @@ function createGameBoard() {
   };
 }
 
+function createPlayer(name, isHuman = true, board) {
+  function attack(enemyBoard, x, y) {
+    enemyBoard.receiveAttack(x, y);
+  }
+
+  return {
+    name,
+    isHuman,
+    board,
+    attack,
+  };
+}
+
 const testShip = createBattleship(4);
 const testBoard = createGameBoard();
 testBoard.placeShip(testShip, 1, 4, true);
