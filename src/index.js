@@ -41,6 +41,8 @@ function createGameBoard() {
     if (board[x][y] !== null) {
       const hitShip = board[x][y];
       hitShip.hit();
+    } else {
+      misses.push([x, y]);
     }
   }
   function allSunk() {
@@ -59,7 +61,7 @@ function createGameBoard() {
     receiveAttack,
     allSunk,
     get missedAttacks() {
-      return missedAttacks;
+      return misses;
     },
     get board() {
       return board;
@@ -72,6 +74,6 @@ function createGameBoard() {
 
 const testShip = createBattleship(4);
 const testBoard = createGameBoard();
-testBoard.placeShip(testShip, 4, 4, true);
-console.log(testShip.isSunk());
+testBoard.placeShip(testShip, 4, 1, true);
+console.log(testBoard.missedAttacks);
 console.log(testBoard.board);
