@@ -46,7 +46,7 @@ function createGameBoard() {
     }
   }
   function allSunk() {
-    for (let i = 0; i <= ships.length; i++) {
+    for (let i = 0; i < ships.length; i++) {
       if (ships[i].isSunk()) {
         continue;
       } else {
@@ -74,6 +74,10 @@ function createGameBoard() {
 
 const testShip = createBattleship(4);
 const testBoard = createGameBoard();
-testBoard.placeShip(testShip, 4, 1, true);
-console.log(testBoard.missedAttacks);
+testBoard.placeShip(testShip, 1, 4, true);
+testBoard.receiveAttack(4, 1);
+testBoard.receiveAttack(4, 2);
+testBoard.receiveAttack(4, 3);
+testBoard.receiveAttack(4, 4);
 console.log(testBoard.board);
+console.log(testBoard.allSunk());
