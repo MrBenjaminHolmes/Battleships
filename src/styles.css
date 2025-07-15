@@ -1,20 +1,26 @@
 body {
-  font-family: Arial, sans-serif;
-
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
-  background: #e3eef8;
+  padding: 40px 20px;
+  background: linear-gradient(to bottom right, #dceefb, #c8e1f0);
+  min-height: 100vh;
+  margin: 0;
 }
 
 #mainBody {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 40px;
+  max-width: 100%;
 }
 
 .board {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
 }
 
 #player,
@@ -24,7 +30,12 @@ body {
   grid-template-rows: repeat(10, 30px);
   gap: 2px;
   width: max-content;
-  margin: 20px;
+  margin: 20px 0;
+  padding: 10px;
+  background-color: #f0f8ff;
+  border: 2px solid #0077cc;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
 }
 
 .cell {
@@ -34,38 +45,41 @@ body {
   border: 1px solid #007bff;
   cursor: pointer;
   user-select: none;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.cell:hover {
+  transform: scale(1.05);
+  background-color: #b3d7ff;
 }
 
 .player.cell.ship {
   background-color: #004d80;
 }
+
 .player.cell.ship.hit,
 .cell.hit {
-  background-color: red;
+  background-color: #ff4d4d;
 }
 
 .cell.miss {
-  background-color: white;
+  background-color: #ffffff;
 }
 
 .board-label {
   text-align: center;
-  margin-bottom: 8px;
-  font-weight: bold;
-  font-size: 1.2em;
+  margin-bottom: 12px;
+  font-weight: 600;
+  font-size: 1.4em;
+  color: #003366;
 }
 
 #winscreen,
 #losescreen {
-  height: 100%;
-  width: 0; /* hidden by default */
   position: fixed;
+  inset: 0;
   z-index: 10;
-  left: 0;
-  top: 0;
   background-color: rgba(0, 0, 0, 0.9);
-  overflow-x: hidden;
-  transition: width 0.5s ease;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -73,9 +87,16 @@ body {
   font-size: 4em;
   font-weight: bold;
   text-align: center;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
 }
 
 #winscreen.show,
 #losescreen.show {
-  width: 100%;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }

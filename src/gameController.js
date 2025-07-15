@@ -25,6 +25,7 @@ export function computerMove() {
   cell.classList.add(hit ? "hit" : "miss");
 
   if (player.board.allSunk()) {
+    loseScreen.style.display = "flex";
     loseScreen.classList.add("show");
   }
 
@@ -51,6 +52,7 @@ export function playerMove() {
       cell.classList.add(hit ? "hit" : "miss");
 
       if (computer.board.allSunk()) {
+        winScreen.style.display = "flex";
         winScreen.classList.add("show");
       }
 
