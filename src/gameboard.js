@@ -1,6 +1,7 @@
 export function createGameBoard() {
   const ships = [];
   const misses = [];
+  const hits = [];
   const board = Array(10)
     .fill(null)
     .map(() => Array(10).fill(null));
@@ -26,6 +27,7 @@ export function createGameBoard() {
     const target = board[y][x];
     if (target !== null) {
       target.hit();
+      hits.push([x, y]);
       return true;
     } else {
       misses.push([x, y]);
@@ -55,6 +57,9 @@ export function createGameBoard() {
     },
     get ships() {
       return ships;
+    },
+    get hits() {
+      return hits;
     },
   };
 }
