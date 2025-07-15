@@ -39,7 +39,7 @@ body {
 .player.cell.ship {
   background-color: #004d80;
 }
-
+.player.cell.ship.hit,
 .cell.hit {
   background-color: red;
 }
