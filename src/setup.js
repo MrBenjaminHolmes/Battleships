@@ -18,8 +18,22 @@ export const computer = createPlayer("Computer", false, computerBoard);
 export function setupBoards() {
   SHIP_TYPES.forEach((type, index) => {
     player.board.placeShip(createBattleship(type.size), 0, index, true);
-    computer.board.placeShip(createBattleship(type.size), 0, index, true);
+
+    let placed = false;
+    while (!placed) {
+      const x = Math.floor(Math.random() * computer.board.size);
+      const y = Math.floor(Math.random() * computer.board.size);
+      const horizontal = Math.random() < 0.5;
+
+      placed = computer.board.placeShip(
+        createBattleship(type.size),
+        x,
+        y,
+        horizontal
+      );
+    }
   });
+  console.log(computer.board.board);
 }
 
 setupBoards();

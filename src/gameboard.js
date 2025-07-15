@@ -61,5 +61,6 @@ export function createGameBoard() {
     get hits() {
       return hits;
     },
+    size: board.length,
   };
 }
