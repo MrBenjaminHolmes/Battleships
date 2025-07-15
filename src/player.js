@@ -4,7 +4,6 @@ export function createPlayer(name, isHuman = true, board) {
   }
 
   return {
-    name,
     isHuman,
     board,
     attack,
