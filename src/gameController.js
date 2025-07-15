@@ -1,4 +1,6 @@
 import { player, computer } from "./setup";
+const winScreen = document.getElementById("winscreen");
+const loseScreen = document.getElementById("losescreen");
 
 let PlayerTurn = true;
 
@@ -23,7 +25,7 @@ export function computerMove() {
   cell.classList.add(hit ? "hit" : "miss");
 
   if (player.board.allSunk()) {
-    alert("COMPUTER WINS");
+    loseScreen.classList.add("show");
   }
 
   PlayerTurn = true;
@@ -49,11 +51,11 @@ export function playerMove() {
       cell.classList.add(hit ? "hit" : "miss");
 
       if (computer.board.allSunk()) {
-        alert("YOU WIN");
+        winScreen.classList.add("show");
       }
 
       PlayerTurn = false;
-      setTimeout(computerMove, 500);
+      setTimeout(computerMove, 100);
     });
   });
 }

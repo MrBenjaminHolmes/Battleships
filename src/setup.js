@@ -33,7 +33,6 @@ export function setupBoards() {
       );
     }
   });
-  console.log(computer.board.board);
 }
 
 setupBoards();
