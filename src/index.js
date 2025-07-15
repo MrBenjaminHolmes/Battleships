@@ -64,11 +64,15 @@ SHIP_TYPES.forEach((type, index) => {
 
 renderBoard(player, "player");
 renderBoard(computer, "computer");
+
 const computerCells = Array.from(document.querySelectorAll(".cell.computer"));
 computerCells.forEach((cell) => {
   cell.addEventListener("click", () => {
-    console.log(cell.dataset.x, cell.dataset.y);
-    enemyBoard.receiveAttack(cell.dataset.x, cell.dataset.y);
-    console.log(enemyBoard.board);
+    const hit = enemyBoard.receiveAttack(cell.dataset.x, cell.dataset.y);
+    if (hit) {
+      cell.classList.add("hit");
+    } else {
+      cell.classList.add("miss");
+    }
   });
 });

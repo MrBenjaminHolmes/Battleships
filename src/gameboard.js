@@ -26,8 +26,10 @@ export function createGameBoard() {
     const target = board[y][x];
     if (target !== null) {
       target.hit();
+      return true;
     } else {
       misses.push([x, y]);
+      return false;
     }
   }
   function allSunk() {
