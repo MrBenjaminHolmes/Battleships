@@ -1,7 +1,7 @@
 import { player, computer } from "./setup";
 const winScreen = document.getElementById("winscreen");
 const loseScreen = document.getElementById("losescreen");
-
+const turnDisplay = document.getElementById("turns");
 let PlayerTurn = true;
 
 export function computerMove() {
@@ -30,6 +30,7 @@ export function computerMove() {
   }
 
   PlayerTurn = true;
+  turnDisplay.firstChild.innerHTML = "YOUR TURN";
 }
 
 export function playerMove() {
@@ -57,7 +58,8 @@ export function playerMove() {
       }
 
       PlayerTurn = false;
-      setTimeout(computerMove, 100);
+      turnDisplay.firstChild.innerHTML = "COMPUTERS TURN";
+      setTimeout(computerMove, 500);
     });
   });
 }
