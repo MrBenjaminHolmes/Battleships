@@ -1,6 +1,7 @@
 import { createPlayer } from "./player";
 import { createGameBoard } from "./gameboard";
 import { createBattleship } from "./ship";
+import { playerMove } from "./gameController";
 import { renderBoard } from "./render";
 
 const SHIP_TYPES = [
@@ -10,6 +11,9 @@ const SHIP_TYPES = [
   { name: "Submarine", size: 3 },
   { name: "Destroyer", size: 3 },
 ];
+
+const startGameBttn = document.getElementById("startGameBtn");
+const placeHeading = document.getElementById("placeHeading");
 const playerBoard = createGameBoard();
 const computerBoard = createGameBoard();
 
@@ -18,26 +22,36 @@ export const computer = createPlayer("Computer", false, computerBoard);
 
 export function setupBoards() {
   let currentShipIndex = 0;
+  let rotation = true;
   const playerBoardContainer = document.querySelector("#player"); // container of cells
-
+  const rotationBttn = document.getElementById("rotateBtn");
+  rotationBttn.addEventListener("click", () => {
+    rotation = !rotation;
+    console.log(rotation);
+  });
   playerBoardContainer.addEventListener("click", (e) => {
+    if (currentShipIndex >= SHIP_TYPES.length) return;
+
     const cell = e.target;
     if (!cell.classList.contains("cell")) return;
-    if (currentShipIndex >= SHIP_TYPES.length) {
-      console.log("All ships placed");
-      return;
-    }
 
     const x = Number(cell.dataset.x);
     const y = Number(cell.dataset.y);
     const shipType = SHIP_TYPES[currentShipIndex];
     const ship = createBattleship(shipType.size);
 
-    const placed = player.board.placeShip(ship, x, y, true);
+    const placed = player.board.placeShip(ship, x, y, rotation);
 
     if (placed) {
       renderBoard(player, "player");
       currentShipIndex++;
+
+      if (currentShipIndex >= SHIP_TYPES.length) {
+        startGameBttn.disabled = false;
+        placeHeading.style.display = "None";
+
+        playerBoardContainer.style.pointerEvents = "none";
+      }
     } else {
     }
   });
