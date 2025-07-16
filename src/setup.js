@@ -23,7 +23,33 @@ export const computer = createPlayer("Computer", false, computerBoard);
 export function setupBoards() {
   let currentShipIndex = 0;
   let rotation = true;
-  const playerBoardContainer = document.querySelector("#player"); // container of cells
+  const playerBoardContainer = document.querySelector("#player");
+  playerBoardContainer.addEventListener("mouseover", (e) => {
+    const cell = e.target;
+    if (!cell.classList.contains("cell")) return;
+    if (currentShipIndex >= SHIP_TYPES.length) return;
+
+    const x = Number(cell.dataset.x);
+    const y = Number(cell.dataset.y);
+    const shipType = SHIP_TYPES[currentShipIndex];
+    const length = shipType.size;
+
+    for (let i = 0; i < length; i++) {
+      const cellX = rotation ? x + i : x;
+      const cellY = rotation ? y : y + i;
+
+      const previewCell = document.querySelector(
+        `.cell[data-x="${cellX}"][data-y="${cellY}"]`
+      );
+      if (previewCell) previewCell.classList.add("preview");
+    }
+  });
+
+  playerBoardContainer.addEventListener("mouseout", (e) => {
+    document.querySelectorAll(".cell.preview").forEach((cell) => {
+      cell.classList.remove("preview");
+    });
+  });
   const rotationBttn = document.getElementById("rotateBtn");
   rotationBttn.addEventListener("click", () => {
     rotation = !rotation;

@@ -25,6 +25,10 @@ body {
   align-items: center;
 }
 
+h3 {
+  margin: 0px;
+}
+
 #player,
 #computer {
   display: grid;
@@ -134,4 +138,7 @@ button:disabled {
 }
 h1 {
   text-decoration: underline;
+}
+.cell.preview {
+  background-color: rgba(0, 255, 0, 0.4);
 }
